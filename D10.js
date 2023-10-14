@@ -195,24 +195,46 @@ splitMe("i love coding");
   Se il valore booleano è true la funzione deve ritornare la stringa senza il primo carattere, altrimenti la deve ritornare senza l'ultimo.
 */
 const deleteOne = function (str1, bool) {
-  const str1Arr = [];
-  const word = str1.split("");
-  const pushedArr = str1Arr.push(word);
+  const words = str1.split("");
   if (bool) {
-    const finalArr = pushedArr.shift();
-    console.log(finalArr);
+    words.shift();
+    const finalStr = words.join("");
+    return finalStr;
   } else {
-    const finalArr = str1Arr.pop();
-    console.log(finalArr);
+    words.pop();
+    const finalStr = words.join("");
+    return finalStr;
   }
 };
-deleteOne("ciao", true);
+
 /* ESERCIZIO 5
   Crea una funzione chiamata "onlyLetters" che riceve una stringa come parametro e la ritorna eliminando tutte le cifre numeriche.
 
   Es.: onlyLetters("I have 4 dogs") => ritorna "I have dogs"
 */
+const onlyLetters = function (str) {
+  const onlyLetrs = [];
+  const letters = str.split("");
+  // console.log(letters);
 
+  for (let i = 0; i < letters.length; i++) {
+    if (
+      letters[i] != 0 &&
+      letters[i] != 1 &&
+      letters[i] != 2 &&
+      letters[i] != 3 &&
+      letters[i] != 4 &&
+      letters[i] != 5 &&
+      letters[i] != 6 &&
+      letters[i] != 7 &&
+      letters[i] != 8 &&
+      letters[i] != 9
+    ) {
+      onlyLetrs.push(letters[i]);
+    }
+  }
+  return onlyLetrs.join("");
+};
 /* ESERCIZIO 6
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
@@ -220,7 +242,25 @@ deleteOne("ciao", true);
 /* ESERCIZIO 7
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
 */
-
+const whatDayIsIt = function () {
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+  if (currentDay === 0) {
+    return "Domenica";
+  } else if (currentDay === 1) {
+    return "Lunedì";
+  } else if (currentDay === 2) {
+    return "Martedì";
+  } else if (currentDay === 3) {
+    return "Mercoledì";
+  } else if (currentDay === 4) {
+    return "Giovedì";
+  } else if (currentDay === 5) {
+    return "Venerdì";
+  } else if (currentDay === 6) {
+    return "Sabato";
+  }
+};
 /* ESERCIZIO 8
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
   Deve invocare la precedente funzione dice() il numero di volte specificato nel parametro, e deve tornare un oggetto contenente una proprietà "sum":
@@ -234,14 +274,44 @@ deleteOne("ciao", true);
   }
 */
 
+const rollTheDices = function (p) {
+  const sommaNumeriEstratti = { sum: 0, values: [] };
+  for (let i = 0; i < p; i++) {
+    const numeroUscito = dice();
+    sommaNumeriEstratti.sum += numeroUscito;
+    sommaNumeriEstratti.values.push(numeroUscito);
+  }
+
+  return sommaNumeriEstratti;
+};
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
+const howManyDays = function (year, monthIndex, day) {
+  const todayDate = new Date().getTime();
 
+  const dateParam = new Date(year, monthIndex, day).getTime();
+
+  const minusDateMlscs = todayDate - dateParam;
+
+  const daysTotal = minusDateMlscs / 1000 / 60 / 60 / 24;
+  const daysTotalFloor = Math.floor(daysTotal);
+
+  return daysTotalFloor;
+};
 /* ESERCIZIO 10
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
 */
-
+const isTodayMyBirthday = function () {
+  const currentDate = new Date();
+  const currentDateMonth = currentDate.getMonth();
+  const currentDateDay = currentDate.getDate();
+  if (currentDateDay === 12 && currentDateMonth === 8) {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
+};
 // Arrays & Oggetti
 
 // NOTA: l'array "movies" usato in alcuni esercizi è definito alla fine di questo file
